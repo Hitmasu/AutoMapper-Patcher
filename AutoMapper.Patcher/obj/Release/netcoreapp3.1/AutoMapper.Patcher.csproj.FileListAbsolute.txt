@@ -1,9 +1,0 @@
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\bin\Release\netcoreapp3.1\AutoMapper.Patcher.deps.json
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\bin\Release\netcoreapp3.1\AutoMapper.Patcher.dll
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\bin\Release\netcoreapp3.1\AutoMapper.Patcher.pdb
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\obj\Release\netcoreapp3.1\AutoMapper.Patcher.AssemblyInfoInputs.cache
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\obj\Release\netcoreapp3.1\AutoMapper.Patcher.AssemblyInfo.cs
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\obj\Release\netcoreapp3.1\AutoMapper.Patcher.csproj.CoreCompileInputs.cache
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\obj\Release\netcoreapp3.1\AutoMapper.Patcher.dll
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\obj\Release\netcoreapp3.1\AutoMapper.Patcher.pdb
-C:\Users\hitmasu\source\repos\AutoMapper.Patcher\AutoMapper.Patcher\obj\Release\netcoreapp3.1\AutoMapper.Patcher.csprojAssemblyReference.cache
