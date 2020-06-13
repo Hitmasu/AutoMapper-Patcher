@@ -72,7 +72,7 @@ namespace AutoMapper.Patcher
                             Operation previousOperation = operations[i];
 
                             //Operation starts (IL_0000)
-                            if (previousOperation.Instance is IMapper)
+                            if (previousOperation.Instance is FieldInfo field && field.FieldType == typeof(IMapper))
                             {
                                 startMapper = previousOperation;
                                 break;

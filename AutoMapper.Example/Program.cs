@@ -11,6 +11,8 @@ namespace AutoMapper.Example
     {
         static void Main(string[] args)
         {
+            BenchmarkAutoMapper b = new BenchmarkAutoMapper();
+            b.MapWithJitex();
             BenchmarkRunner.Run<BenchmarkAutoMapper>();
         }
     }
