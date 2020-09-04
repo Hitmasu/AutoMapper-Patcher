@@ -1,6 +1,25 @@
 # AutoMapper Patcher
 Removing AutoMapper (at runtime) with Jitex to increase performance.
 
+------
+
+This code:
+
+```C#
+PersonViewModel vm = Mapper.Map<PersonViewModel> (_person);
+```
+
+Will be replaced by this:
+
+```c#
+PersonViewModel vm = new PersonViewModel();
+vm.Name = _person.Name,
+vm.Username = _person.Name;
+vm.BirthDate = _person.BirthDate;
+vm.Street = _person.Street;
+//...
+```
+
 ### Packages used
 
 AutoMapper 10.0.0
