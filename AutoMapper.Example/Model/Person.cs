@@ -9,5 +9,12 @@ namespace AutoMapper.Example.Model
         public string Username { get; set; }
         public DateTime BirthDate { get; set; }
         public bool HasCar { get; set; }
+
+        public string Street { get; set; }
+
+        public string City { get; set; }
+
+        public string ZipCode { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

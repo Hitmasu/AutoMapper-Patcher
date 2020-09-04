@@ -16,7 +16,7 @@ namespace AutoMapper.Patcher
 
         static AutoMapperPatcher()
         {
-            MethodMap = typeof(IMapper).GetMethods().First(m => m.Name == "Map");
+            MethodMap = typeof(IMapperBase).GetMethods().First(m => m.Name == "Map");
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace AutoMapper.Patcher
                 MethodBody body = new MethodBody((MethodInfo)context.Method);
 
                 //All operations on method
-                IList<Operation> operations = body.Operations.ToList();
+                IList<Operation> operations = body.ReadIL().ToList();
 
                 foreach (Operation operation in operations.Where(c => c.OpCode != OpCodes.Nop))
                 {

@@ -11,20 +11,19 @@ namespace AutoMapper.Example
     {
         static void Main(string[] args)
         {
-            BenchmarkAutoMapper b = new BenchmarkAutoMapper();
-            b.MapWithJitex();
-            BenchmarkRunner.Run<BenchmarkAutoMapper>();
+            BenchmarkRunner.Run<AutoMapperBenchmark>();
         }
     }
 
-    public class BenchmarkAutoMapper
+    public class AutoMapperBenchmark
     {
         private static readonly IMapper Mapper;
 
         private readonly Person _person;
 
-        static BenchmarkAutoMapper()
+        static AutoMapperBenchmark()
         {
+            //Load patcher
             AutoMapperPatcher.Initialize();
 
             MapperConfiguration config = new MapperConfiguration(cfg =>
@@ -35,15 +34,19 @@ namespace AutoMapper.Example
             Mapper = config.CreateMapper();
         }
 
-        public BenchmarkAutoMapper()
+        public AutoMapperBenchmark()
         {
             _person = new Person
             {
                 Id = 1,
                 BirthDate = DateTime.Now,
                 HasCar = true,
-                Name = "Jason",
-                Username = "Bason"
+                Name = "Lindsey",
+                Username = "R. Martin",
+                City = "City ABC XYZ",
+                Street = "Street ABC XYZ",
+                PhoneNumber = "+2222222200000",
+                ZipCode = "XYZ-8520"
             };
         }
 
