@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutoMapper.Patcher\AutoMapper.Patcher.csproj" />
+    <ProjectReference Include="..\AutoMapper.Patcher\AutoMapper.Module.csproj" />
   </ItemGroup>
 
 </Project>

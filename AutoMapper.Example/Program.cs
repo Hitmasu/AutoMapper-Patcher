@@ -1,9 +1,10 @@
 ﻿using AutoMapper.Example.Model;
 using AutoMapper.Example.ViewModel;
-using AutoMapper.Patcher;
 using BenchmarkDotNet.Attributes;
 using System;
+using AutoMapper.Module;
 using BenchmarkDotNet.Running;
+using Jitex;
 
 namespace AutoMapper.Example
 {
@@ -23,8 +24,7 @@ namespace AutoMapper.Example
 
         static AutoMapperBenchmark()
         {
-            //Load patcher
-            AutoMapperPatcher.Initialize();
+            JitexManager.LoadModule<AutoMapperModule>();
 
             MapperConfiguration config = new MapperConfiguration(cfg =>
             {

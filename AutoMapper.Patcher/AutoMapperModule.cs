@@ -1,39 +1,25 @@
-﻿using Jitex.IL;
-using Jitex.JIT;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using Jitex;
+using Jitex.Builder.IL;
+using Jitex.JIT.Context;
+using MethodBody = Jitex.Builder.Method.MethodBody;
 
-using MethodBody = Jitex.Builder.MethodBody;
-
-namespace AutoMapper.Patcher
+namespace AutoMapper.Module
 {
-    public class AutoMapperPatcher
+    public class AutoMapperModule : JitexModule
     {
         private static readonly MethodInfo MethodMap;
 
-        static AutoMapperPatcher()
+        static AutoMapperModule()
         {
             MethodMap = typeof(IMapperBase).GetMethods().First(m => m.Name == "Map");
         }
 
-        /// <summary>
-        /// Initialize Jitex
-        /// </summary>
-        public static void Initialize()
-        {
-            ManagedJit jit = ManagedJit.GetInstance();
-
-            jit.AddCompileResolver(CompileResolve);
-        }
-
-        /// <summary>
-        /// Method resolver.
-        /// </summary>
-        /// <param name="context">Method will be compiled.</param>
-        private static void CompileResolve(CompileContext context)
+        protected override void MethodResolver(MethodContext context)
         {
             if (context.Method.Name == "MapWithJitex")
             {
@@ -89,7 +75,7 @@ namespace AutoMapper.Patcher
                         //Store all properties to make bind.
                         PropertyInfo[] sourceProperties = sourceOperation.Instance.FieldType.GetProperties();
                         PropertyInfo[] destionationProperties = typeDestination.GetProperties();
-                        
+
                         //To start bind, we need firstly instantiate our destiny variable.
                         ConstructorInfo defaultConstructorDest = typeDestination.GetConstructor(Type.EmptyTypes);
 
@@ -101,7 +87,7 @@ namespace AutoMapper.Patcher
                         //TypeDestination variable = new TypeDestionation();
                         byte[] defaultCtor = BitConverter.GetBytes(defaultConstructorDest.MetadataToken);
                         ilToReplace.AddRange(defaultCtor);
-                        
+
                         foreach (PropertyInfo sourceProperty in sourceProperties)
                         {
                             //Bind only property with same name (default config to AutoMapper)
@@ -115,7 +101,7 @@ namespace AutoMapper.Patcher
                                 //Load field (_person) passed by argument on IMapper.Map
                                 ilToReplace.Add((byte)OpCodes.Dup.Value);
                                 ilToReplace.Add((byte)OpCodes.Ldarg_0.Value);
-                                
+
                                 ilToReplace.Add((byte)OpCodes.Ldfld.Value);
                                 byte[] fieldToken = BitConverter.GetBytes(sourceOperation.MetadataToken.Value);
                                 ilToReplace.AddRange(fieldToken);
@@ -138,14 +124,14 @@ namespace AutoMapper.Patcher
                         }
 
                         //Replace operations from AutoMapper
-                        
-                        int endMapperIndex = startMapper.ILIndex;
+
+                        int endMapperIndex = startMapper.Offset;
 
                         //All operations BEFORE IMapper.Map
                         byte[] startIL = body.IL[..endMapperIndex];
 
                         //All operations AFTER IMapper.Map
-                        byte[] endIL = body.IL[(operation.ILIndex + operation.Size)..];
+                        byte[] endIL = body.IL[(operation.Offset + operation.Size)..];
 
                         //The new IL generated
                         byte[] newIl = new byte[startIL.Length + endIL.Length + ilToReplace.Count];
@@ -161,6 +147,11 @@ namespace AutoMapper.Patcher
                 //Resolve method with our custom IL.
                 context.ResolveBody(body);
             }
+        }
+
+        protected override void TokenResolver(TokenContext context)
+        {
+            
         }
     }
 }
