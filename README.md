@@ -22,23 +22,22 @@ vm.Street = _person.Street;
 
 ### Packages used
 
-AutoMapper 10.0.0
-
-Jitex 2.0.2-alpha
+- AutoMapper 10.0.0
+- Jitex 3.0.4-alpha
 
 ### Result
 
 ``` ini
-BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19041.450 (2004/?/20H1)
+BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19041.508 (2004/?/20H1)
 Intel Core i5-7600 CPU 3.50GHz (Kaby Lake), 1 CPU, 4 logical and 4 physical cores
-.NET Core SDK=3.1.401
-  [Host]     : .NET Core 3.1.7 (CoreCLR 4.700.20.36602, CoreFX 4.700.20.37001), X64 RyuJIT
-  DefaultJob : .NET Core 3.1.7 (CoreCLR 4.700.20.36602, CoreFX 4.700.20.37001), X64 RyuJIT
+.NET Core SDK=3.1.402
+  [Host]     : .NET Core 3.1.8 (CoreCLR 4.700.20.41105, CoreFX 4.700.20.41903), X64 RyuJIT
+  DefaultJob : .NET Core 3.1.8 (CoreCLR 4.700.20.41105, CoreFX 4.700.20.41903), X64 RyuJIT
 ```
 |          Method |      Mean |    Error |   StdDev |
 |---------------- |----------:|---------:|---------:|
-|    MapWithJitex |  18.45 ns | 0.236 ns | 0.197 ns |
-| MapWithoutJitex | 146.10 ns | 2.088 ns | 1.953 ns |
+|    MapWithJitex |  18.31 ns | 0.349 ns | 0.402 ns |
+| MapWithoutJitex | 154.68 ns | 2.672 ns | 3.077 ns |
 
 ### Code
 
